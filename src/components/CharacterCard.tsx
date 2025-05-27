@@ -12,7 +12,7 @@ const normalizeName = (name: string) =>
   name.toLowerCase().replace(/\s+/g, "");
 
 const CharacterCard = ({ character }: CharacterCardProps) => {
-  const imagePath = `/images/${normalizeName(character.name)}.jpeg`;
+  const imagePath = `/images/character/${normalizeName(character.name)}.jpg`;
 
   return (
     <MotionBox
