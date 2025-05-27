@@ -8,7 +8,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useAppSelector } from "./hooks/useredux";
+import { useAppSelector } from "./hooks/useRedux";
 import { characters } from "./data/characters";
 import CharacterCard from "./components/CharacterCard";
 import SummonModal from "./components/SummonModal";
@@ -16,7 +16,7 @@ import { selectGems } from "./features/summon/summonSlice";
 
 function App() {
   // Alias 'open' as 'isOpen' for Chakra UI compatibility
-  const { open: isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const gems = useAppSelector(selectGems);
 
   return (

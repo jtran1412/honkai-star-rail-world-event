@@ -20,18 +20,25 @@ import {
   summonCharacter,
   selectSummoned,
 } from "../features/summon/summonSlice";
-import { characters, Character } from "../data/characters";
+import { characters } from "../data/characters";
+import type { Character } from "../data/characters";
 
 interface SummonModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+// Extend Character to include upgrades for summoned characters
+interface SummonedCharacter extends Character {
+  upgrades: number;
+}
+
 const SUMMON_COSTS = [100, 200, 300, 400, 500]; // cost per rarity 1★ to 5★
 
 const SummonModal: React.FC<SummonModalProps> = ({ isOpen, onClose }) => {
   const gems = useAppSelector(selectGems);
-  const summoned = useAppSelector(selectSummoned);
+  // Cast summoned to SummonedCharacter[] so TypeScript knows about upgrades property
+  const summoned = useAppSelector(selectSummoned) as SummonedCharacter[];
   const dispatch = useAppDispatch();
   const toast = useToast();
 
@@ -47,7 +54,7 @@ const SummonModal: React.FC<SummonModalProps> = ({ isOpen, onClose }) => {
       for (const char of charsOfRarity) {
         // Find deployed with upgrades
         const deployedChar = summoned.find(
-          (s) => s.Id === char.Id && s.upgrades >= 5
+          (s) => s.id === char.id && s.upgrades >= 5
         );
         if (!deployedChar) return false;
       }
@@ -114,8 +121,8 @@ const SummonModal: React.FC<SummonModalProps> = ({ isOpen, onClose }) => {
               <Text fontWeight="bold" mb={2}>
                 You summoned: {result.name} ({result.rarity}★)
               </Text>
-              <Text>Status: {result.status}</Text>
-              <Text>Area: {result.exhibitionArea}</Text>
+              <Text>Title: {result.title}</Text>
+              <Text>Area: {result.area}</Text>
             </Box>
           )}
         </ModalBody>
