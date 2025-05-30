@@ -10,9 +10,9 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 Update the configuration to enable type-aware lint rules if you want: 
--maximum code safety
--early detection of subtle bugs
--stricter standards 
+- maximum code safety
+- early detection of subtle bugs
+- stricter standards 
 
 ```js
 export default tseslint.config({
