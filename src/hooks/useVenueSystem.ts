@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from './useRedux';
 import { assignAssistant, removeAssistant } from '../store/gameSlice';
-import type { Venue } from '../types/gameTypes';
+import type { Venue, Assistant } from '../types/gameTypes';
 import { characters } from '../data/characters';
 
 export const useVenueSystem = () => {
@@ -9,7 +9,7 @@ export const useVenueSystem = () => {
   const { venues, assistants, unlockedCharacters, level } = useAppSelector(state => state.game);
 
   const calculateVenueRevenue = useCallback((venue: Venue) => {
-    const venueAssistants = assistants.filter(a => a.venueId === venue.id);
+    const venueAssistants = assistants.filter((a: Assistant) => a.venueId === venue.id);
     const baseRevenue = venue.baseRevenue;
     
     // Calculate assistant bonus
@@ -37,7 +37,7 @@ export const useVenueSystem = () => {
 
     // Find first available venue of matching type that is unlocked
     const availableVenue = venues.find(venue => {
-      const venueAssistants = assistants.filter(a => a.venueId === venue.id);
+      const venueAssistants = assistants.filter((a: Assistant) => a.venueId === venue.id);
       return venue.type === characterData.area && 
              venueAssistants.length < venue.maxAssistants &&
              venue.unlockLevel <= level;
@@ -81,7 +81,7 @@ export const useVenueSystem = () => {
     calculateVenueRevenue,
     assignCharacterToVenue,
     removeAssistantFromVenue: (characterId: string) => {
-      const assistant = assistants.find(a => a.characterId === characterId);
+      const assistant = assistants.find((a: Assistant) => a.characterId === characterId);
       if (!assistant) {
         return {
           success: false,
