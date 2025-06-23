@@ -15,30 +15,21 @@ import {
 } from "@chakra-ui/react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
-  selectGems,
-  addGems,
   summonCharacter,
-  selectSummoned,
 } from "../features/summon/summonSlice";
 import { characters } from "../data/characters";
-import type { Character } from "../data/characters";
+import type { Character, UnlockedCharacter } from "../types/gameTypes";
 
 interface SummonModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-// Extend Character to include upgrades for summoned characters
-interface SummonedCharacter extends Character {
-  upgrades: number;
-}
-
 const SUMMON_COSTS = [100, 200, 300, 400, 500]; // cost per rarity 1★ to 5★
 
 const SummonModal: React.FC<SummonModalProps> = ({ isOpen, onClose }) => {
-  const gems = useAppSelector(selectGems);
-  // Cast summoned to SummonedCharacter[] so TypeScript knows about upgrades property
-  const summoned = useAppSelector(selectSummoned) as SummonedCharacter[];
+  const gems = useAppSelector(state => state.game.gems) as number;
+  const summoned = useAppSelector(state => state.game.unlockedCharacters) as UnlockedCharacter[];
   const dispatch = useAppDispatch();
   const toast = useToast();
 
@@ -54,7 +45,7 @@ const SummonModal: React.FC<SummonModalProps> = ({ isOpen, onClose }) => {
       for (const char of charsOfRarity) {
         // Find deployed with upgrades
         const deployedChar = summoned.find(
-          (s) => s.id === char.id && s.upgrades >= 5
+          (s) => s.characterId === char.id && s.duplicateLevel >= 5
         );
         if (!deployedChar) return false;
       }
@@ -92,7 +83,6 @@ const SummonModal: React.FC<SummonModalProps> = ({ isOpen, onClose }) => {
 
     // Dispatch summon and deduct gems
     dispatch(summonCharacter(char));
-    dispatch(addGems(-cost));
     setResult(char);
   }
 
