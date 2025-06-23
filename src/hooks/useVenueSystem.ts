@@ -2,18 +2,19 @@ import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from './useRedux';
 import { assignAssistant, removeAssistant } from '../store/gameSlice';
 import type { Venue, Assistant, UnlockedCharacter, Character } from '../types/gameTypes';
+import type { RootState } from '../store';
 import { characters } from '../data/characters';
 
 export const useVenueSystem = () => {
   const dispatch = useAppDispatch();
-  const { venues, assistants, unlockedCharacters, level } = useAppSelector(state => state.game);
+  const { venues, assistants, unlockedCharacters, level } = useAppSelector((state: RootState) => state.game);
 
   const calculateVenueRevenue = useCallback((venue: Venue) => {
     const venueAssistants = assistants.filter((a: Assistant) => a.venueId === venue.id);
     const baseRevenue = venue.baseRevenue;
     
     // Calculate assistant bonus
-    const assistantBonus = venueAssistants.reduce((total, assistant) => {
+    const assistantBonus = venueAssistants.reduce((total: number, assistant: Assistant) => {
       return total + assistant.generationRate;
     }, 0);
 
