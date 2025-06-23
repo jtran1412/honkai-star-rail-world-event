@@ -6,6 +6,7 @@ import { useAppSelector } from "../hooks/useRedux";
 import { useVenueSystem } from "../hooks/useVenueSystem";
 import { characters } from "../data/characters";
 import CharacterCard from "./CharacterCard";
+import type { Character, UnlockedCharacter } from "../types/gameTypes";
 
 export const CharacterList = () => {
   const { unlockedCharacters, assistants, level, totalRevenue } = useAppSelector((state) => state.game);
@@ -68,8 +69,8 @@ export const CharacterList = () => {
       }}
       gap={6}
     >
-      {characters.map(character => {
-        const unlockedChar = unlockedCharacters.find(uc => uc.characterId === character.id);
+      {characters.map((character: Character) => {
+        const unlockedChar = unlockedCharacters.find((uc: UnlockedCharacter) => uc.characterId === character.id);
         return (
           <CharacterCard
             key={character.id}

@@ -31,6 +31,7 @@ import { acknowledgeLevel } from "./store/gameSlice";
 import CharacterList from "./components/CharacterList";
 import { characters } from "./data/characters";
 import { CoinIcon, GemIcon } from "./components/icons/Icons";
+import type { Assistant, Character, UnlockedCharacter } from "./types/gameTypes";
 
 const XP_PER_GOLD = 1.0;
 const BASE_XP_PER_LEVEL = 1000;
@@ -110,10 +111,10 @@ function App() {
 
   const getDeployedCharacters = (venueId: string) => {
     return assistants
-      .filter(a => a.venueId === venueId)
-      .map(a => {
-        const character = characters.find(c => c.id === a.characterId);
-        const charData = unlockedCharacters.find(uc => uc.characterId === a.characterId);
+      .filter((a: Assistant) => a.venueId === venueId)
+      .map((a: Assistant) => {
+        const character = characters.find((c: Character) => c.id === a.characterId);
+        const charData = unlockedCharacters.find((uc: UnlockedCharacter) => uc.characterId === a.characterId);
         return {
           ...character,
           duplicateLevel: charData?.duplicateLevel || 1,
