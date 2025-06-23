@@ -130,7 +130,7 @@ function App() {
         {/* Header with resources and level */}
         <Flex justify="space-between" align="center" wrap="wrap" gap={4}>
           <VStack align="stretch" spacing={2}>
-            <Heading size="lg">Cosmic Exhibition Manager</Heading>
+            <Heading size="lg">Honkai Cosmic Exhibition Manager World Event Money Making Game</Heading>
             <HStack>
               <Text>Level {level}</Text>
               <Progress 
