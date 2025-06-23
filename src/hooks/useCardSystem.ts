@@ -1,4 +1,5 @@
-import { useAppDispatch, useAppSelector } from './useRedux';
+import { useAppDispatch, useAppSelector } from "./useredux";
+import type { RootState } from "../store";
 import { addCharacter, spendGems } from '../store/gameSlice';
 import { characters } from '../data/characters';
 import { getRandomCharacter } from '../utils/randomUtils';
@@ -20,7 +21,7 @@ const DRAW_OPTIONS: DrawOption[] = [
 
 export const useCardSystem = () => {
   const dispatch = useAppDispatch();
-  const { gems, unlockedCharacters, level } = useAppSelector((state) => state.game);
+  const { gems, unlockedCharacters, level } = useAppSelector((state: RootState) => state.game);
 
   const canAffordDraw = (drawType: number) => {
     const option = DRAW_OPTIONS[drawType];

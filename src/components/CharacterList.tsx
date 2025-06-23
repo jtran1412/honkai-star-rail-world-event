@@ -6,10 +6,11 @@ import { useAppSelector } from "../hooks/useRedux";
 import { useVenueSystem } from "../hooks/useVenueSystem";
 import { characters } from "../data/characters";
 import CharacterCard from "./CharacterCard";
-import type { Character, UnlockedCharacter } from "../types/gameTypes";
+import type { Character, UnlockedCharacter, Assistant } from "../types/gameTypes";
+import type { RootState } from "../store";
 
 export const CharacterList = () => {
-  const { unlockedCharacters, assistants, level, totalRevenue } = useAppSelector((state) => state.game);
+  const { unlockedCharacters, assistants, level, totalRevenue } = useAppSelector((state: RootState) => state.game);
   const { assignCharacterToVenue, removeAssistantFromVenue } = useVenueSystem();
   const toast = useToast();
 
@@ -57,7 +58,7 @@ export const CharacterList = () => {
     }
   };
 
-  const deployedCharacterIds = assistants.map(a => a.characterId);
+  const deployedCharacterIds = assistants.map((a: Assistant) => a.characterId);
 
   return (
     <Grid

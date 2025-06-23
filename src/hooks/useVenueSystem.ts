@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from './useRedux';
+import { useAppDispatch, useAppSelector } from './useredux';
 import { assignAssistant, removeAssistant } from '../store/gameSlice';
 import type { Venue, Assistant, UnlockedCharacter, Character } from '../types/gameTypes';
 import type { RootState } from '../store';

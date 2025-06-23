@@ -19,6 +19,7 @@ import {
 } from "../features/summon/summonSlice";
 import { characters } from "../data/characters";
 import type { Character, UnlockedCharacter } from "../types/gameTypes";
+import type { RootState } from "../store";
 
 interface SummonModalProps {
   isOpen: boolean;
@@ -28,8 +29,8 @@ interface SummonModalProps {
 const SUMMON_COSTS = [100, 200, 300, 400, 500]; // cost per rarity 1★ to 5★
 
 const SummonModal: React.FC<SummonModalProps> = ({ isOpen, onClose }) => {
-  const gems = useAppSelector(state => state.game.gems) as number;
-  const summoned = useAppSelector(state => state.game.unlockedCharacters) as UnlockedCharacter[];
+  const gems = useAppSelector((state: RootState) => state.game.gems) as number;
+  const summoned = useAppSelector((state: RootState) => state.game.unlockedCharacters) as UnlockedCharacter[];
   const dispatch = useAppDispatch();
   const toast = useToast();
 

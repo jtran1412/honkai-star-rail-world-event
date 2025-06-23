@@ -226,7 +226,7 @@ function App() {
                                   Deployed Characters ({revenue.assistantCount}/{venue.maxAssistants}):
                                 </Text>
                                 <AvatarGroup max={4} size="md">
-                                  {deployedChars.map(char => (
+                                  {deployedChars.map((char: { id: string; name: string; duplicateLevel: number; generationRate: number }) => (
                                     <Avatar
                                       key={char.id}
                                       name={char.name}
