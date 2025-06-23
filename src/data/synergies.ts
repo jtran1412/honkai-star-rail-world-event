@@ -1,9 +1,9 @@
-import type { BoothArea } from "./characters";
+import type { VenueType } from '../types/gameTypes';
 
 export interface SynergyRule {
   characters: string[];       // character names involved in synergy
   bonusText: string;          // text description of the synergy bonus
-  areas?: BoothArea[];           // optional: filter by area if relevant
+  areas?: VenueType[];           // optional: filter by area if relevant
 }
 
 export const synergyRules: SynergyRule[] = [

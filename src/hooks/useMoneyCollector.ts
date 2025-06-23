@@ -1,9 +1,9 @@
 import { useAppSelector, useAppDispatch } from "./useRedux";
-import { selectGold, addGold } from "../features/summon/summonSlice";
+import { addGold } from "../features/summon/summonSlice";
 import { useEffect } from "react";
 
 export default function useMoneyCollector(increment: number, intervalMs: number) {
-  const gold = useAppSelector(selectGold);
+  const gold = useAppSelector(state => state.game.goldCoins);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
