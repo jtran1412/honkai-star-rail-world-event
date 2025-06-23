@@ -2,7 +2,7 @@ import {
   Grid,
   useToast,
 } from "@chakra-ui/react";
-import { useAppSelector } from "../hooks/useRedux";
+import { useAppSelector } from "../hooks/useredux";
 import { useVenueSystem } from "../hooks/useVenueSystem";
 import { characters } from "../data/characters";
 import CharacterCard from "./CharacterCard";

@@ -23,7 +23,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "./hooks/useRedux";
+import { useAppSelector, useAppDispatch } from "./hooks/useredux";
 import { useCardSystem } from "./hooks/useCardSystem";
 import { useVenueSystem } from "./hooks/useVenueSystem";
 import { useGoldGeneration } from "./hooks/useGoldGeneration";
@@ -31,7 +31,8 @@ import { acknowledgeLevel } from "./store/gameSlice";
 import CharacterList from "./components/CharacterList";
 import { characters } from "./data/characters";
 import { CoinIcon, GemIcon } from "./components/icons/Icons";
-import type { Assistant, Character, UnlockedCharacter } from "./types/gameTypes";
+import type { Assistant, Character, UnlockedCharacter, Venue } from "./types/gameTypes";
+import type { RootState } from "./store";
 
 const XP_PER_GOLD = 1.0;
 const BASE_XP_PER_LEVEL = 1000;
@@ -51,7 +52,7 @@ function App() {
     level,
     totalRevenue,
     lastLevelUpNotification,
-  } = useAppSelector((state) => state.game);
+  } = useAppSelector((state: RootState) => state.game);
   const { drawCard, canAffordDraw, drawOptions } = useCardSystem();
   const { calculateVenueRevenue } = useVenueSystem();
   const dispatch = useAppDispatch();
@@ -174,7 +175,7 @@ function App() {
               <Box>
                 <Heading size="md" mb={4}>Venues</Heading>
                 <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={4}>
-                  {venues.map((venue) => {
+                  {venues.map((venue: Venue) => {
                     const deployedChars = getDeployedCharacters(venue.id);
                     const revenue = calculateVenueRevenue(venue);
 
