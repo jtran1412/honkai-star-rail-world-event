@@ -227,14 +227,17 @@ function App() {
                                   Deployed Characters ({revenue.assistantCount}/{venue.maxAssistants}):
                                 </Text>
                                 <AvatarGroup max={4} size="md">
-                                  {deployedChars.map((char: { id: string; name: string; duplicateLevel: number; generationRate: number }) => (
-                                    <Avatar
-                                      key={char.id}
-                                      name={char.name}
-                                      src={`/images/characters/${char.id}.jpg`}
-                                      title={`${char.name} (${char.duplicateLevel}★) - ${char.generationRate.toFixed(1)}/s`}
-                                    />
-                                  ))}
+                                  {deployedChars.map((char) => {
+                                    if (!char.id || !char.name) return null;
+                                    return (
+                                      <Avatar
+                                        key={char.id as string}
+                                        name={char.name as string}
+                                        src={`/images/characters/${char.id}`}
+                                        title={`${char.name} (${char.duplicateLevel}★) - ${char.generationRate.toFixed(1)}/s`}
+                                      />
+                                    );
+                                  })}
                                 </AvatarGroup>
                               </Box>
                             </>
