@@ -1,0 +1,40 @@
+import type { Venue, VenueType } from '../types/gameTypes';
+
+export const venues: Venue[] = [
+  {
+    id: 'venue_1',
+    name: 'Cosmic Café',
+    type: 'Market' as VenueType,
+    theme: 'space',
+    level: 1,
+    unlockLevel: 1,
+    baseRevenue: 100,
+    maxAssistants: 4,
+    bonusThemes: ['space', 'food'],
+    imageUrl: '/images/venues/cosmic-cafe.jpg',
+  },
+  {
+    id: 'venue_2',
+    name: 'Stellar Gallery',
+    type: 'Commemoration' as VenueType,
+    theme: 'art',
+    level: 1,
+    unlockLevel: 2,
+    baseRevenue: 150,
+    maxAssistants: 4,
+    bonusThemes: ['art', 'space'],
+    imageUrl: '/images/venues/stellar-gallery.jpg',
+  },
+  {
+    id: 'venue_3',
+    name: 'Astral Arena',
+    type: 'Entertainment' as VenueType,
+    theme: 'space',
+    level: 1,
+    unlockLevel: 3,
+    baseRevenue: 200,
+    maxAssistants: 4,
+    bonusThemes: ['space', 'performance'],
+    imageUrl: '/images/venues/astral-arena.jpg',
+  },
+]; 

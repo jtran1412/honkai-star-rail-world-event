@@ -1,9 +1,10 @@
+// src/store/index.ts
 import { configureStore } from "@reduxjs/toolkit";
-import summonReducer from "../features/summon/summonSlice";
+import gameReducer from './gameSlice';
 
 export const store = configureStore({
   reducer: {
-    summon: summonReducer,
+    game: gameReducer,
   },
 });
 

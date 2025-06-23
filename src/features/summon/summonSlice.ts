@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Character } from "../../data/characters";
-import type { RootState } from "../../store";
+import type { Character } from "../../types/gameTypes";
+// import type { RootState } from "../../store";
 
 export interface DeployedCharacter extends Character {
   duplicates: number; // number of duplicates used for upgrades (max 5)
@@ -108,12 +108,12 @@ export const {
   addDuplicate,
 } = summonSlice.actions;
 
-export const selectGems = (state: RootState) => state.summon.gems;
-export const selectGold = (state: RootState) => state.summon.gold;
-export const selectLevel = (state: RootState) => state.summon.level;
-export const selectExperience = (state: RootState) => state.summon.experience;
-export const selectExperienceToNextLevel = (state: RootState) => state.summon.experienceToNextLevel;
-export const selectSummoned = (state: RootState) => state.summon.summoned;
-export const selectDeployed = (state: RootState) => state.summon.deployed;
+// export const selectGems = (state: RootState) => state.summon.gems;
+// export const selectGold = (state: RootState) => state.summon.gold;
+// export const selectLevel = (state: RootState) => state.summon.level;
+// export const selectExperience = (state: RootState) => state.summon.experience;
+// export const selectExperienceToNextLevel = (state: RootState) => state.summon.experienceToNextLevel;
+// export const selectSummoned = (state: RootState) => state.summon.summoned;
+// export const selectDeployed = (state: RootState) => state.summon.deployed;
 
 export default summonSlice.reducer;

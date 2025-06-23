@@ -10,33 +10,33 @@ import {
 import { createToaster } from "@ark-ui/react/toast";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import {
-  selectDeployed,
   upgradeCharacter,
   addDuplicate,
 } from "../features/summon/summonSlice";
 import { synergyRules } from "../data/synergies";
-import type { BoothArea } from "../data/characters";
+import type { VenueType } from "../types/gameTypes";
+import type { DeployedCharacter } from "../features/summon/summonSlice";
 
 const toast = createToaster({ placement: "top-end" });
 
 const DeployedCharacters: React.FC = () => {
-  const deployed = useAppSelector(selectDeployed);
+  const deployed = useAppSelector(() => []) as DeployedCharacter[];
   const dispatch = useAppDispatch();
 
-  const deployedNames = deployed.map((c) => c.name);
-  const deployedAreas = deployed.map((c) => c.area as BoothArea);
+  const deployedNames = deployed.map((c: DeployedCharacter) => c.name);
+  const deployedAreas = deployed.map((c: DeployedCharacter) => c.area as VenueType);
 
   const activeSynergies = synergyRules.filter((rule) => {
-    const allCharsDeployed = rule.characters.every((char) =>
+    const allCharsDeployed = rule.characters.every((char: string) =>
       deployedNames.includes(char)
     );
     const areaMatch =
-      !rule.areas || rule.areas.some((area) => deployedAreas.includes(area));
+      !rule.areas || rule.areas.some((area: VenueType) => deployedAreas.includes(area));
     return allCharsDeployed && areaMatch;
   });
 
   const handleUpgrade = (id: string) => {
-    const char = deployed.find((c) => c.id === id);
+    const char = deployed.find((c: DeployedCharacter) => c.id === id);
     if (!char) return;
 
     if (char.duplicates === 0) {
@@ -83,7 +83,7 @@ const DeployedCharacters: React.FC = () => {
       <VStack gap={4} align="stretch">
         {deployed.length === 0 && <Text>No characters deployed yet.</Text>}
 
-        {deployed.map((char) => (
+        {deployed.map((char: DeployedCharacter) => (
           <Box
             key={char.id}
             p={3}
