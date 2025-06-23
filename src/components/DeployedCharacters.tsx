@@ -10,19 +10,17 @@ import {
 import { createToaster } from "@ark-ui/react/toast";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import {
-  selectDeployed,
   upgradeCharacter,
   addDuplicate,
 } from "../features/summon/summonSlice";
 import { synergyRules } from "../data/synergies";
 import type { VenueType } from "../types/gameTypes";
 import type { DeployedCharacter } from "../features/summon/summonSlice";
-import type { Character } from "../types/gameTypes";
 
 const toast = createToaster({ placement: "top-end" });
 
 const DeployedCharacters: React.FC = () => {
-  const deployed = useAppSelector(selectDeployed);
+  const deployed = useAppSelector(() => []) as DeployedCharacter[];
   const dispatch = useAppDispatch();
 
   const deployedNames = deployed.map((c: DeployedCharacter) => c.name);
