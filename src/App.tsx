@@ -42,6 +42,9 @@ const getXPForLevel = (level: number) => {
   return Math.floor(BASE_XP_PER_LEVEL * Math.pow(1.5, level - 1));
 };
 
+// Add normalizeName utility at the top of the file
+const normalizeName = (name: string) => name.toLowerCase().replace(/\s+/g, "");
+
 function App() {
   const { 
     goldCoins, 
@@ -233,7 +236,7 @@ function App() {
                                       <Avatar
                                         key={char.id as string}
                                         name={char.name as string}
-                                        src={`/images/characters/${char.id}`}
+                                        src={`/images/characters/${normalizeName(char.name as string)}.jpg`}
                                         title={`${char.name} (${char.duplicateLevel}★) - ${char.generationRate.toFixed(1)}/s`}
                                       />
                                     );
