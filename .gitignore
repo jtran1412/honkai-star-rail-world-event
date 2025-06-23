@@ -25,3 +25,4 @@ dist-ssr
 
 # Ignore legacy or mis-cased files
 src/hooks/useRedux.ts
+!src/hooks/useredux.ts
