@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from './useRedux';
 import { assignAssistant, removeAssistant } from '../store/gameSlice';
-import type { Venue, Assistant } from '../types/gameTypes';
+import type { Venue, Assistant, UnlockedCharacter, Character } from '../types/gameTypes';
 import { characters } from '../data/characters';
 
 export const useVenueSystem = () => {
@@ -27,7 +27,7 @@ export const useVenueSystem = () => {
 
   const assignCharacterToVenue = (characterId: string) => {
     // Get character data
-    const characterData = characters.find(c => c.id === characterId);
+    const characterData = characters.find((c: Character) => c.id === characterId);
     if (!characterData) {
       return {
         success: false,
@@ -36,15 +36,15 @@ export const useVenueSystem = () => {
     }
 
     // Find first available venue of matching type that is unlocked
-    const availableVenue = venues.find(venue => {
-      const venueAssistants = assistants.filter((a: Assistant) => a.venueId === venue.id);
-      return venue.type === characterData.area && 
-             venueAssistants.length < venue.maxAssistants &&
-             venue.unlockLevel <= level;
+    const availableVenue = venues.find((v: Venue) => {
+      const venueAssistants = assistants.filter((a: Assistant) => a.venueId === v.id);
+      return v.type === characterData.area && 
+             venueAssistants.length < v.maxAssistants &&
+             v.unlockLevel <= level;
     });
 
     if (!availableVenue) {
-      const matchingVenue = venues.find(v => v.type === characterData.area);
+      const matchingVenue = venues.find((v: Venue) => v.type === characterData.area);
       if (!matchingVenue || matchingVenue.unlockLevel > level) {
         return {
           success: false,
@@ -58,7 +58,7 @@ export const useVenueSystem = () => {
     }
 
     // Get character's generation rate based on duplicate level
-    const character = unlockedCharacters.find(c => c.characterId === characterId);
+    const character = unlockedCharacters.find((c: UnlockedCharacter) => c.characterId === characterId);
     if (!character) {
       return {
         success: false,
